@@ -1,0 +1,57 @@
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.my-row{
+    /* margin-right: -15px;
+    margin-left: -15px; */
+}
+
+.mycontainer{
+    margin: 0 auto;
+    width: 1300px;
+}
+.panel-left{
+    float: left;
+    width: 50%;
+}
+
+.panel-right{
+    float: right;
+    width: 50%;
+}
+
+#bar-label-rotation1{
+    height: 500px;
+    width: 600px;
+}
+#bar-label-rotation2{
+    height: 500px;
+    width: 600px;
+}
+#bar-label-rotation3{
+    height: 500px;
+    width: 600px;
+}
+
+#table{
+
+}
+
+.right-box{
+    float: right;
+    width: 50%;
+}
+
+.my-btn{
+    display: inline-block;
+    margin-right: 20px;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background-color: rgb(47, 28, 224);
+    color: aliceblue;
+}

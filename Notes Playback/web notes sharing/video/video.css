@@ -1,0 +1,101 @@
+.progress{
+    color: #0E97F5;
+    font-size: 9px;
+}
+.progress_track{
+    float: left;
+    width: 78%;
+    /* width:440px; */
+    margin: 50px 0 20px 0;
+    height:3px;
+    background:rgba(219,226,238,1);
+    border-radius:2px;
+    position: relative;
+}
+.progress_totaltime{
+    float: left;
+    margin-left: 2%;
+    margin-top: 45px;
+    width: 10%;
+
+}
+.progress_speed{
+    float: left;
+    margin-top: 45px;
+    width: 10%;
+    border: 1px solid rgba(14,151,245,1);
+    box-sizing: border-box;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.progress_track .progress_current{
+    position: absolute;
+    width: 0;
+    height:3px;
+    background:rgba(14,151,245,1);
+    border-radius:2px;
+    z-index: 1000;
+}
+
+.progress_track .progress_current .circle{
+    position: absolute;
+    top: -4px;
+    left: -5px;
+    width:11px;
+    height:11px;
+    background:rgba(14,151,245,1);
+    border-radius: 6px;
+    z-index: 1000;
+}
+
+.progress_track .progress_buffered{
+    position: absolute;
+    top: 0;
+    left: 10%;
+    /* width: 10%; */
+    height:3px;
+    /* background:rgb(198, 226, 243); */
+    background: #ccc;
+    border-radius:2px;
+
+}
+
+.progress_track .bubble{
+    width: 27px;
+    height: 18px;
+    margin-top: -24px;
+    margin-left: -8px;
+    background-image: url('../images/bubble.png');
+    background-size: 27px 18px;
+    background-repeat: no-repeat;
+    color: #fff;
+    text-align: center;
+    line-height: 19px;
+}
+
+.controls_play{
+    margin: 0 auto;
+    height: 60px;
+    position: relative;
+}
+.controls_play .back_off{
+    width: 30px;
+    position: absolute;
+    left: 20%;
+    top: 50%;
+    margin-top: -15px;
+}
+.controls_play .fast_forward{
+    width: 30px;
+    position: absolute;
+    right: 20%;
+    top: 50%;
+    margin-top: -15px;
+}
+.controls_play .play{
+    width: 60px;
+    position: absolute;
+    left: 50%;
+    margin-left: -30px;
+}

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../library/jointjs/joint.css">
+    <script src="../../library/jointjs/jquery.js"></script>
+    <script src="../../library/jointjs/lodash.js"></script>
+    <script src="../../library/jointjs/backbone.js"></script>
+    <script src="../../library/jointjs/joint.js"></script>
+
+</head>
+
+<body>
+    <div id="paper-mark-available"></div>
+
+    <script>
+        (function () {
+
+            var graph = new joint.dia.Graph;
+            new joint.dia.Paper({
+                el: $('#paper-mark-available'),
+                width: 1000, height: 500, gridSize: 1,
+                model: graph,
+                defaultLink: new joint.dia.Link({
+                    attrs: { '.marker-target': { d: 'M 10 0 L 0 5 L 10 10 z' } }
+                }),
+                validateConnection: function (cellViewS, magnetS, cellViewT, magnetT) {
+                    // Prevent linking from input ports.
+                    if (magnetS && magnetS.getAttribute('port-group') === 'in') return false;
+                    // Prevent linking from output ports to input ports within one element.
+                    if (cellViewS === cellViewT) return false;
+                    // Prevent linking to input ports.
+                    return magnetT && magnetT.getAttribute('port-group') === 'in';
+                },
+                // Enable marking available cells & magnets
+                markAvailable: true
+            });
+
+            var m1 = new joint.shapes.devs.Model({
+                position: { x: 50, y: 50 },
+                size: { width: 90, height: 200 },
+                // inPorts: ['Port_NEA_H','Port_NEA_I', "Port_NEA_J", "Port_NEA_K", "Port_NEA_L", "Port_NEA_OTC_A"],
+                outPorts: ['Port_NEA_H', 'Port_NEA_I', "Port_NEA_J", "Port_NEA_K", "Port_NEA_L", "Port_NEA_OTC_A"],
+                ports: {
+                    groups: {
+                        'in': {
+                            attrs: {
+                                '.port-body': {
+                                    fill: '#16A085',
+                                    magnet: 'passive'
+                                }
+                            }
+                        },
+                        'out': {
+                            attrs: {
+                                '.port-body': {
+                                    fill: '#E74C3C'
+                                }
+                            }
+                        }
+                    }
+                },
+                attrs: {
+                    '.label': { text: 'NEA', 'ref-x': .5, 'ref-y': .2 },
+                    rect: { fill: '#2ECC71' }
+                }
+            }).addTo(graph);
+
+            var m2 = new joint.shapes.devs.Model({
+                position: { x: 850, y: 50 },
+                size: { width: 90, height: 200 },
+                inPorts: ['Port_NEB_H', 'Port_NEB_I', "Port_NEB_J", "Port_NEB_K", "Port_NEB_L", "Port_NEB_OTC_A"],
+                // outPorts: ['Port_NEA_H','Port_NEA_I', "Port_NEA_J", "Port_NEA_K", "Port_NEA_L", "Port_NEA_OTC_A"],
+                ports: {
+                    groups: {
+                        'in': {
+                            attrs: {
+                                '.port-body': {
+                                    fill: '#16A085',
+                                    magnet: 'passive'
+                                }
+                            }
+                        },
+                        'out': {
+                            attrs: {
+                                '.port-body': {
+                                    fill: '#E74C3C'
+                                }
+                            }
+                        }
+                    }
+                },
+                attrs: {
+                    '.label': { text: 'NEB', 'ref-x': .5, 'ref-y': .2 },
+                    rect: { fill: '#2ECC71' }
+                }
+            }).addTo(graph);
+
+            // m1.clone().translate(300, 0).attr('.label/text', 'Model 2').addTo(graph);
+
+            // var link = new joint.shapes.devs.Link({
+            //     source: {
+            //       id: m1.id,
+            //       port: 'Port_NEA_H'
+            //     },
+            //     target: {
+            //       id: m2.id,
+            //       port: 'Port_NEB_H'
+            //     }
+            //   });
+            // // Assume graph has the srcModel and dstModel with in and out ports.
+            // graph.addCell(link)
+
+            createLinks();
+
+            function createLinks() {
+
+                // outPorts: ['Port_NEA_H','Port_NEA_I', "Port_NEA_J", "Port_NEA_K", "Port_NEA_L", "Port_NEA_OTC_A"],
+                // inPorts: ['Port_NEB_H','Port_NEB_I', "Port_NEB_J", "Port_NEB_K", "Port_NEB_L", "Port_NEB_OTC_A"],
+                // var linksArray = [
+                //     {
+                //         m1: "Port_NEA_H",
+                //         m2: "Port_NEB_H"
+                //     },
+                //     {
+                //         m1: "Port_NEA_I",
+                //         m2: "Port_NEB_I"
+                //     },
+                //     {
+                //         m1: "Port_NEA_J",
+                //         m2: "Port_NEB_J"
+                //     },
+                //     {
+                //         m1: "Port_NEA_K",
+                //         m2: "Port_NEB_K"
+                //     },
+                //     {
+                //         m1: "Port_NEA_L",
+                //         m2: "Port_NEB_L"
+                //     },
+                //     {
+                //         m1: "Port_NEA_OTC_A",
+                //         m2: "Port_NEB_OTC_A"
+                //     },
+                // ];
+                var linksArray = [
+                    {
+                        m1: "Port_NEA_H",
+                        m2: "Port_NEB_H"
+                    },
+                    {
+                        m1: "Port_NEA_I",
+                        m2: "Port_NEB_I"
+                    },
+                    {
+                        m1: "Port_NEA_J",
+                        m2: "Port_NEB_J"
+                    },
+                    {
+                        m1: "Port_NEA_K",
+                        m2: "Port_NEB_K"
+                    },
+                    {
+                        m1: "Port_NEA_L",
+                        m2: "Port_NEB_L"
+                    },
+                    {
+                        m1: "Port_NEA_OTC_A",
+                        m2: "Port_NEB_OTC_A"
+                    },
+                ];
+
+                linksArray.forEach(element => {
+
+                    var link = new joint.shapes.devs.Link({
+                        source: {
+                            id: m1.id,
+                            port: element.m1
+                        },
+                        target: {
+                            id: m2.id,
+                            port: element.m2
+                        }
+                    });
+
+                    graph.addCell(link);
+                });
+                // var link = new joint.shapes.devs.Link({
+                //     source: {
+                //       id: m1.id,
+                //       port: 'Port_NEA_H'
+                //     },
+                //     target: {
+                //       id: m2.id,
+                //       port: 'Port_NEB_H'
+                //     }
+                //   });
+            }
+
+        })();
+
+
+        function createSelect() {
+            var optionTemplate = [
+                '<option value="3">Three</option>',
+            ]
+            var selectMenuTemplate = [
+                '<select class="custom-select custom-select-sm">',
+                '<option selected>Open this select menu</option>',
+                '<option value="1">One</option>',
+                '<option value="2">Two</option>',
+                '<option value="3">Three</option>',
+                '</select>'
+            ]
+        }
+    </script>
+</body>
+
+</html>

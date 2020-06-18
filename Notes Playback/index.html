@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>笔记回放</title>
+    <script src="./javascripts/jquery.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .canvas {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .wrap {
+      }
+
+      .line {
+        background: url("./paperBg.jpg");
+        background-size: cover;
+      }
+      #bgImg {
+        width: 100%;
+      }
+      #title {
+        font-size: 13px;
+        line-height: 48px;
+        text-align: center;
+        border-bottom: 1px solid rgb(231, 231, 231);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="title"></div>
+    <div class="wrap">
+        <button id="start"> start </button>
+        <button id="stop">stop</button>
+        <button id="play"> play/pause </button>
+        <button id="pause">play/pause</button>
+        <button id="fast-forward">Fast forward</button>
+        <button id="back">back</button>
+      <canvas id="canvas" class="canvas"></canvas>
+    </div>
+
+    <img src="./images/paperBg.jpg" id="bgImg" style="display: none;" />
+    <audio src="./images/3410223590.mp4" style="display: none;" id="audio" autoplay="autoplay"></audio>
+  </body>
+  <script src="./javascripts/index.js"></script>
+</html>

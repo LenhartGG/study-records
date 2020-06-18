@@ -1,0 +1,74 @@
+html{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.photo{
+    margin: 30px auto;
+    width:58px;
+    height:58px;
+    background:rgba(230,228,228,1);
+    border-radius: 50%;
+}
+
+.share_owner{
+    margin: 10px auto;
+    /* width:120px; */
+    height:21px;
+    font-size:18px;
+    /* font-family:NokiaPureHeadlineChinese-Bold,NokiaPureHeadlineChinese; */
+    font-weight:bold;
+    color:rgba(40,50,67,1);
+    line-height:21px;
+    text-align: center;
+}
+
+.share_limit{
+    margin: 5px auto;
+    font-size: 12px;
+    color:rgba(165,174,184,1);
+    text-align: center;
+}
+
+.share_code{
+    display: block;
+    margin: 50px auto;
+    width: 226px;
+    height: 36px;
+    text-align: center;
+    color: #A5AEB8;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #979797;
+    border-color: #979797;
+}
+
+.share_code{
+    /* display: block;
+    margin: 50px auto;
+    width:195px;
+    height: 36px;
+    text-align: center;
+    background: rgb(241, 239, 239);
+    color: rgb(144, 146, 148);
+    border-radius: 18px;
+    outline: none;
+    border: none; */
+}
+
+
+.submit{
+    display: block;
+    margin: 88px auto;
+    width:195px;
+    height:39px;
+    background:rgba(14,151,245,1);
+    /* border-radius:5px; */
+    border-radius:20px;
+    text-align: center;
+    line-height: 39px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    outline: none;
+    border: none;
+}

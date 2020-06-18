@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>readme</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1><a id="Web_notes_sharing_demo_using_documents_0"></a>Web notes sharing demo using documents</h1>
+<ul>
+<li>web notes sharing
+<ul>
+<li>image
+<ul>
+<li>image sources</li>
+</ul>
+</li>
+<li>Dplayer
+<ul>
+<li>hls.hs</li>
+<li>flv.js</li>
+<li>web-notes.js</li>
+</ul>
+</li>
+<li>share
+<ul>
+<li>jquery.js</li>
+<li>reset.css</li>
+<li>share.css</li>
+</ul>
+</li>
+<li>video
+<ul>
+<li>video.js</li>
+</ul>
+</li>
+<li>share.html</li>
+<li>Dplayer.html</li>
+<li>video.html</li>
+</ul>
+</li>
+</ul>
+<h2><a id="Dplayer_20"></a>Dplayer</h2>
+<p>html5_video + DPlayer</p>
+<h3><a id="Dplayer__MSEMedia_Source_Extensions__24"></a>Dplayer 的 MSE(Media Source Extensions) 支持</h3>
+<p>1.HLS</p>
+<pre><code>const dp = new DPlayer({
+    container: document.getElementById('dplayer'),
+    video: {
+        url: 'demo.m3u8',
+        type: 'hls',
+    },
+    pluginOptions: {
+        hls: {
+            // hls config
+        },
+    },
+});
+console.log(dp.plugins.hls); // Hls 实例
+</code></pre>
+<pre><code>// 另一种方式，使用 customType
+const dp = new DPlayer({
+    container: document.getElementById('dplayer'),
+    video: {
+        url: 'demo.m3u8',
+        type: 'customHls',
+        customType: {
+            customHls: function(video, player) {
+                const hls = new Hls();
+                hls.loadSource(video.src);
+                hls.attachMedia(video);
+            },
+        },
+    },
+});
+</code></pre>
+<p>2.FLV</p>
+<p>需要在 DPlayer.min.js 前面加载 flv.js。</p>
+<pre><code>const dp = new DPlayer({
+    container: document.getElementById('dplayer'),
+    video: {
+        url: 'demo.flv',
+        type: 'flv',
+    },
+    pluginOptions: {
+        flv: {
+            // flv config
+        },
+    },
+});
+console.log(dp.plugins.flv); // flv 实例
+</code></pre>
+<pre><code>// 另一种方式，使用 customType
+const dp = new DPlayer({
+    container: document.getElementById('dplayer'),
+    video: {
+        url: 'demo.flv',
+        type: 'customFlv',
+        customType: {
+            customFlv: function(video, player) {
+                const flvPlayer = flvjs.createPlayer({
+                    type: 'flv',
+                    url: video.src,
+                });
+                flvPlayer.attachMediaElement(video);
+                flvPlayer.load();
+            },
+        },
+    },
+});
+</code></pre>
+<p>3.配合其他 MSE 库使用</p>
+<pre><code>&lt;script src="pearplayer.js"&gt;&lt;/script&gt;
+</code></pre>
+<pre><code>const dp = new DPlayer({
+    container: document.getElementById('dplayer'),
+    video: {
+        url: 'https://qq.webrtc.win/tv/Pear-Demo-Yosemite_National_Park.mp4',
+        type: 'pearplayer',
+        customType: {
+            pearplayer: function(video, player) {
+                new PearPlayer(video, {
+                    src: video.src,
+                    autoplay: player.options.autoplay,
+                });
+            },
+        },
+    },
+});
+</code></pre>
+<h2><a id="Video_124"></a>Video</h2>
+<p>html5-video</p>
+</div>
+</body>
+
+</html>

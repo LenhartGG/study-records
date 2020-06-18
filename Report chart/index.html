@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/fontawesome.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="./css/bootstrap-table.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div class="mycontainer ">
+        <div class="my-row clearfix">
+
+            <div class="panel-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Fail log check progress of profile</h3>
+                    </div>
+                    <div class="panel-body">
+                        
+                        <div id="bar-label-rotation1"></div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="panel-right">
+                
+                <div class="panel panel-default">
+                    <!-- <div class="panel-heading">
+                      <h3 class="panel-title">AI analysis result feedback</h3>
+                    </div> -->
+                    <div class="panel-body" style="margin-top: 38px;">
+                        
+                        <table id="table1"  
+                        data-height="500"
+                        data-pagination="true"
+                        data-page-size="10"
+                        data-pagination="true"
+                        data-virtual-scroll="true" 
+                        data-search="true"
+                        data-show-refresh="true"
+                        data-show-toggle="true"
+                        data-show-fullscreen="true"
+                        data-show-columns="true"
+                        data-show-columns-toggle-all="true"
+                        data-show-export="true"
+                        data-click-to-select="true">
+                            <thead>
+                                <tr>
+                                    <th data-field="profile">Profile</th>
+                                    <th data-field="date" data-align="center">Date</th>
+                                    <th data-field="total" data-align="center">Total Run</th>
+                                    <th data-field="failed" data-align="center">Failed Case</th>
+                                    <th data-field="checked" data-align="center">Tester Checked</th>
+                                    <th data-field="feedback" data-align="center">Feedback</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+
+        <div class="my-row clearfix">
+
+            <div class="panel-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Fail log check progress by tester</h3>
+                    </div>
+                    <div class="panel-body">
+                        
+                        <div id="bar-label-rotation2"></div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="panel-right">
+                
+                <div class="panel panel-default">
+                    <!-- <div class="panel-heading">
+                      <h3 class="panel-title">AI analysis result feedback</h3>
+                    </div> -->
+                    <div class="panel-body" style="margin-top: 38px;">
+                        
+                        <table id="table2"  
+                        data-height="500"
+                        data-pagination="true"
+                        data-page-size="10"
+                        data-virtual-scroll="true" 
+                        data-search="true"
+                        data-show-refresh="true"
+                        data-show-toggle="true"
+                        data-show-fullscreen="true"
+                        data-show-columns="true"
+                        data-show-columns-toggle-all="true"
+                        data-show-export="true"
+                        data-click-to-select="true">
+                            <thead>
+                                <tr>
+                                    <th data-field="username" data-align="center">Name</th>
+                                    <th data-field="date" data-align="center">Date</th>
+                                    <th data-field="total" data-align="center">Total Run</th>
+                                    <th data-field="failed" data-align="center">Failed Case</th>
+                                    <th data-field="checked" data-align="center">Tester Checked</th>
+                                    <th data-field="feedback" data-align="center">Feedback</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+
+        <div class="my-row">
+        
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Failed Case details</h3>
+                </div>
+                <div class="panel-body">
+                    
+                    <table id="table3"  
+                    data-pagination="true"
+                    data-page-size="10"
+                    data-virtual-scroll="true" 
+                    data-search="true"
+                    data-show-refresh="true"
+                    data-show-toggle="true"
+                    data-show-fullscreen="true"
+                    data-show-columns="true"
+                    data-show-columns-toggle-all="true"
+                    data-show-export="true"
+                    data-click-to-select="true">
+                        <thead>
+                            <tr>
+                                <th data-field="profile">Profile</th>
+                                <th data-field="link" data-align="center" data-formatter="linkFormatter">Failed Case</th>
+                                <th data-field="failedlog">Failed Log</th>
+                                <th data-field="AIClassification" data-align="center">AI Classification</th>
+                                <th data-field="TesterFeedback" data-align="center">Tester Feedback</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+                
+        </div>
+
+        <div class="my-row">
+            
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Feedback to AI Classification</h3>
+                </div>
+                <div class="panel-body">
+                    
+                    <div id="bar-label-rotation3"></div>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="my-row clearfix">
+            <div class="right-box">
+                <div class="my-btn btn-day">Day</div>
+                <div class="my-btn btn-week">Week</div>
+                <div class="my-btn btn-release">Release</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./javascripts/jquery.js"></script>
+<script src="./javascripts/popper.js"></script>
+<script src="./javascripts/bootstrap.js"></script>
+<script src="./javascripts/bootstrap-table.js"></script>
+
+<script type="text/javascript" src="./javascripts/echart.min.js"></script>
+<script src="./javascripts/index.js"></script>
+
+</html>

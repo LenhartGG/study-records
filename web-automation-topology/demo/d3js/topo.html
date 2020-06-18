@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            overflow: hidden;
+        }
+        #togo{
+            width: 800px;
+            height:500px;
+            border:1px solid #ccc;
+            user-select: none;
+        }
+        #togo text{
+            font-size:10px;/*和js里保持一致*/
+            fill:#1A2C3F;
+            text-anchor: middle;
+        }
+        #togo .node-other{
+
+            text-anchor: start;
+        }
+        #togo .health1{
+            stroke:#92E1A2;
+        }
+        #togo .health2{
+            stroke:orange;
+        }
+        #togo .health3{
+            stroke:red;
+        }
+        #togo #cloud,#togo #database{
+            fill:#ccc;
+        }
+        #togo .link{
+            stroke:#E4E8ED;
+        }
+        #togo .node-title{
+            font-size: 14px;
+        }
+        #togo .node-code circle{
+           fill:#3F86F5;
+        }
+        #togo .node-code text{
+            fill:#fff;
+        }
+        #togo .node-bg{
+            fill:#fff;
+        }
+        #togo .arrow{
+            fill:#E4E8ED;
+        }
+    </style>
+    <script src="data.js"></script>
+</head>
+<body>
+ <svg id="togo" width="800" height="500">
+
+ </svg>
+ <script type="text/javascript" src="http://d3js.org/d3.v5.min.js"></script>
+ <script src="togo.js"></script>
+ <script>
+
+ </script>
+
+ <script>
+    let t=new Togo('#togo',__options);
+    t.render();
+ </script>
+
+
+</body>
+</html>

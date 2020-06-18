@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>笔记回放</title>
+    <script src="./javascripts/jquery.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .canvas {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .wrap {
+      }
+
+      .line {
+        background: url("./paperBg.jpg");
+        background-size: cover;
+      }
+      #bgImg {
+        width: 100%;
+      }
+      #title {
+        font-size: 13px;
+        line-height: 48px;
+        text-align: center;
+        border-bottom: 1px solid rgb(231, 231, 231);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="title"></div>
+    <div class="wrap">
+      <canvas id="canvas" class="canvas"></canvas>
+    </div>
+
+    <img src="./images/paperBg.jpg" id="bgImg" style="display: none;" />
+    <audio src="./images/3410223590.mp4" style="display: none;" id="audio" autoplay="autoplay"></audio>
+  </body>
+  <script type="text/javascript">
+    let interval = null;
+    let points = [];
+    var pWidth = "";
+    var pHeight = "";
+    var canvas = document.getElementById("canvas");
+    var bgImg = document.getElementById("bgImg");
+    var ctx = canvas.getContext("2d");
+    var url =
+      GetUrlString("note") === "null" ? "default" : GetUrlString("note");
+    function GetUrlString(param) {
+      var sValue = location.search.match(
+        new RegExp("[\?\&]" + param + "=([^\&]*)(\&?)", "i")
+      );
+      return sValue ? decodeURI(sValue[1]) : decodeURI(sValue);
+    }
+    function drawToCanvas(jsonData) {
+      // console.log(jsonData)
+      var length = jsonData.length;
+      for (var index = 1; index < length; index++) {
+        var startItem = jsonData[index - 1];
+        var xPosStart = startItem["x"];
+        var yPosStart = startItem["y"];
+        var resetStart = startItem["reset"];
+        var endItem = jsonData[index];
+        var xPosEnd = endItem["x"];
+        var yPosEnd = endItem["y"];
+        var resetEnd = jsonData[index]["reset"];
+        if (!resetEnd) {
+          var ratio = window.devicePixelRatio || 1;
+          //ctx.strokeStyle = "black";
+          ctx.strokeStyle = jsonData[index]['pointColor'];;
+          ctx.lineWidth = ratio;
+          var bookWidth = 3750;
+          var bookHeight = 5600;
+          var scaleX = pWidth / bookWidth;
+          var scaleY = pHeight / bookHeight;
+          xPosStart = (xPosStart - 160) * scaleX;
+          yPosStart = (yPosStart - 60) * scaleY;
+          xPosEnd = (xPosEnd - 160) * scaleX;
+          yPosEnd = (yPosEnd - 60) * scaleY;
+          ctx.beginPath();
+          // console.log(parseInt(xPosStart), parseInt(yPosStart));
+          // console.log(parseInt(xPosEnd), parseInt(yPosEnd));
+          ctx.moveTo(xPosStart, yPosStart);
+          ctx.lineTo(xPosEnd, yPosEnd);
+          ctx.stroke();
+        }
+      }
+    }
+    var img1 = document.getElementById("#bgImg");
+    window.onload = function() {
+      console.log($("#bgImg"));
+      
+      var width = $("#bgImg").width();
+      var height = $("#bgImg").height();
+      var ratio = window.devicePixelRatio || 1;
+      var currentDot = 0;
+      if (ratio !== 1) {
+        canvas.style.width = width + "px";
+        canvas.style.height = height + "px";
+        canvas.width = width * ratio;
+        canvas.height = height * ratio;
+        pWidth = canvas.width;
+        pHeight = canvas.height;
+      }
+      // let jsonUrl = "./" + url + "/vlog.json";
+      url = 'images'
+      let jsonUrl = "./vlog.json";
+      $.get(jsonUrl, function(result) {
+        console.log(result);
+        
+        let data = result;
+        $("#title").html(data.noteName);
+        let dataPoints = data.points;
+        let bgUrl = data.backgroundImg
+          ? `./${url}/${data.backgroundImg}`
+          : "./images/paperBg.jpg";
+        $("#audio").attr("src", `./${url}/${data.audioFile}`);
+        const step = 10;
+        $("#canvas").css({
+          "background-image": `url('${bgUrl}')`,
+          "background-size": "cover"
+        });
+        let currentStroke = dataPoints[0].strokeNum;
+        let baseTS = "";
+        document.getElementById("audio").play();
+        if (data.noteType === 2) {
+          baseTS = parseInt(data.create_time_stamp);
+        } else {
+          baseTS = parseInt(dataPoints[0].ts);
+        }
+        // for (let i = 0; i < dataPoints.length; i++) {
+        //   setTimeout(function() {
+        //     points.push(dataPoints[i]);
+        //     drawToCanvas(points);
+        //   }, i * 500);
+        // }
+        interval = setInterval(() => {
+          // console.log(baseTS - parseInt(dataPoints[currentDot].ts));
+          if (Math.abs(baseTS - parseInt(dataPoints[currentDot].ts)) < step) {
+            dataPoints[currentDot].reset = false;
+            if (dataPoints[currentDot].strokeNum !== currentStroke) {
+              dataPoints[currentDot].reset = true;
+              currentStroke = dataPoints[currentDot].strokeNum;
+            }
+            points.push(dataPoints[currentDot]);
+            drawToCanvas(points);
+            currentDot += 1;
+          } else {
+            baseTS += step;
+          }
+          if (currentDot > dataPoints.length - 1) {
+            clearInterval(interval);
+          }
+        }, step);
+      });
+    };
+    document.addEventListener(
+      "WeixinJSBridgeReady",
+      () => {
+        document.getElementById("audio").play();
+      },
+      false
+    );
+  </script>
+</html>

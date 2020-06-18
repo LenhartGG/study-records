@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诺笔有声</title>
+    <link rel="stylesheet" href="./shared/reset.css">
+    <link rel="stylesheet" href="./shared/share.css">
+    <script type="text/javascript" src="./shared/utils.js"></script>
+    <script type="text/javascript">
+        window.onload = initPage;
+    </script>
+</head>
+<body>
+    <div class="mywrap">
+        <div class="photo">
+        </div>
+    </div>
+    <div class="mywrap">
+        <div class="share_owner" id="share_owner">
+            的笔记分享
+        </div>
+    </div>
+
+    <div class="share_limit", id="share_limit">笔记分享时至: </div>
+
+    <input class="share_pwd share_code" id="share_pwd" type="text" placeholder="请输入笔记的密码">
+
+    <div class="valid_msg"></div>
+    <button class="submit" id="submit" onclick=clickSubmit()>提交</button>
+</body>
+</html>
